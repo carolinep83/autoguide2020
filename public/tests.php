@@ -15,5 +15,10 @@ include_once("../src/Auto.php");
 include_once("../src/donnees.inc.php");
 /*LIGNE DE TEST*/
 echo Auto::titre('Ford', 'Fiesta', 'strong');
+echo Auto::titre('Poulin', 'Caroline', 'h1');
+var_dump(Auto::trouverModele($voitures, 'Lada', 'California'));
+var_dump(Auto::trouverModele($voitures, 'Ford', 'California'));
+var_dump(Auto::trouverModele($voitures, 'Ford', 'Fiesta'));
+var_dump(Auto::ariane($voitures, 'Ford', 'fiesta'));
 // ... CONTINUER ...
 ?>

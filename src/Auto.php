@@ -14,7 +14,7 @@ Votre nom :
 */
 class Auto {
 	/** Méthode "titre" qui retourne le titre d'une voiture dont la marque et le modele sont passés en paramètres.
-	 * Le résultat peut être envelopée ou non d'une balise dont le nom est passé en paramètre.
+	 * Le résultat peut être envelopé ou non d'une balise dont le nom est passé en paramètre.
 	 * Notes:
 	 * - Il n'y a pas de validation de la combinaison. On pourrait donc avoir une "Ferrari Focus"
 	 * - Si une $balise est fournie, on retourne le titre sous le modele suivant "<p>Ferrari Focus</p>"
@@ -26,9 +26,9 @@ class Auto {
 	 * @return string - Le titre mis en forme
 	*/
 	static public function titre($nomMarque, $nomModele="", $balise="") {
-		$resultat = $nomMarque." ".$nomModele;
+		$resultat = $nomMarque;
 		if ($nomModele) {
-			$resultat = $nomMarque." ".$nomModele;
+			$resultat .= " ".$nomModele;
 		}
 		if ($balise != "") {
 			$resultat = '<'.$balise.'>'.$resultat.'</'.$balise.'>';
@@ -44,9 +44,20 @@ class Auto {
 	 * @param string $nomModele - Le modele à rechercher dans la marque
 	 * @return array - Le array du modele ou false
 	 */
+	static public function trouverModele($autos, $nomMarque, $nomModele){
+
+		if (!isset($autos[$nomMarque])){
+			return false;
+		}
+		if (!isset($autos[$nomMarque][$nomModele])){
+			return false;
+		}
+		$resultat = $autos[$nomMarque][$nomModele];
+		return $resultat;
+	}
 
 
-	/** Méthode "ariane" qui retourne le HTML du fil d'Ariane se trouvant DANS le div "menu"
+	/** Méthode "ariane" qui retourne le HTML du fil d'Ariane se trouvant DANS le nav "menu"
 	 * Notes :
 	 * - Si une $nomMarque est fournie, on retourne le titre de la voiture et un lien vers index (voir la maquette)
 	 * - Si une $nomMarque n'est pas fournie, on ne retourne que le mot "Accueil" (voir la maquette)
@@ -54,7 +65,18 @@ class Auto {
 	 * @param string $nomModele - Le modele de voiture. Valeur par défaut : "".
 	 * @return string - Le HTML du fil d'Ariane
 	 */
-
+	static public function ariane($nomMarque, $nomModele){
+	$resultat = '';
+	$resultat .= '';
+	$resultat .= '<nav id="ariane">';
+	$resultat .= '<ul>';
+	$resultat .= '<li><a href="index.php">Accueil</a></li>';
+	$resultat .= '<li><a href="marque.php?nomMarque=Ferrari">Ferrari</a></li>';
+	$resultat .= '<li><span>California</span></li>';
+	$resultat .= '</ul>';
+	$resultat .= '	</nav>';
+	return $resultat;
+	}
 	 
 	/** Méthode "lien" qui retourne le code HTML d'un lien retrouvé dans la page index
 	 * qui permet d'afficher les détails d'une voiture
@@ -62,6 +84,21 @@ class Auto {
 	 * @param string $nomModele - Le modele de voiture
 	 * @return string - Le HTML dw la balise <a>
 	 */
+	static public function lien($nomMarque,$nomModele, $balise="") {
+		$resultat = '';
+		$resultat .= '';
+
+	}
+	// static public function titre($nomMarque, $nomModele="", $balise="") {
+	// 	$resultat = $nomMarque;
+	// 	if ($nomModele) {
+	// 		$resultat .= " ".$nomModele;
+	// 	}
+	// 	if ($balise != "") {
+	// 		$resultat = '<'.$balise.'>'.$resultat.'</'.$balise.'>';
+	// 	}
+	// 	return $resultat;
+	// }
 
 
 	/** Méthode "image" qui retourne le code HTML d'une image composé en fonction des paramètres
